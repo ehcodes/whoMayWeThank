@@ -8,39 +8,19 @@ class Player {
 
 // function to get playerName
 
-// function to assign playerName
+// function to assignPlayerName
+    // takes user input
+    // changes innerText of specified player's playerName
 
-// assign playName
+// call function to assign player1Name
+
+// call function to assign player2Name
 
 // player1Score
 
 // player2score
 
 // identify active player
-
-// class cardset
-    // card.invention
-    // card.rightAnswer
-    // card.moreInfoLink
-    // card.answerIndex
-    // card.wrongAnswer1 - empty initially
-    // card.wrongAnswer2 - empty initially
-    // card.wrongAnswer3 - empty initially
-
-class CardSet {
-    constructor(invention,rightAnswer,moreInfoLink){
-        this.invention = invention
-        this.rightAnswer = rightAnswer
-        this.moreInfoLink = moreInfoLink
-        this.answerIndex = null
-        this.wrongAnswer1 = ``
-        this.wrongAnswer2 = ``
-        this.wrongAnswer3 = ``
-    }
-}
-
-// array to store card objects
-
 
 // all answers array - with all possible answers
 let answers = [
@@ -100,6 +80,37 @@ let answers = [
 `Michael Harney`,
 `Benjamin F. Jackson`]
 
+// function to loop through the answers array and create 30 cardsets for the current game
+    // return an array of cardsets
+
+// function to start game round
+
+// class cardset
+    // card.invention
+    // card.rightAnswer
+    // card.moreInfoLink
+    // card.answerIndex
+    // card.wrongAnswer1 - empty initially
+    // card.wrongAnswer2 - empty initially
+    // card.wrongAnswer3 - empty initially
+
+    class CardSet {
+        constructor(invention,rightAnswer,moreInfoLink){
+            this.invention = invention
+            this.rightAnswer = rightAnswer
+            this.moreInfoLink = moreInfoLink
+            this.answerIndex = null
+            this.wrongAnswer1 = ``
+            this.wrongAnswer2 = ``
+            this.wrongAnswer3 = ``
+        }
+    }
+    
+    // array to store card remaing card objects for this game
+    
+    
 // function to loop through all possible answers and assign them to card.wrongAnswers
     // ensure none of the selected answers is the same as the right answer.
     // ensure none of the selected answers is the same as the other wrong answers.
+ 
+// each round will consists of 3 cardsets

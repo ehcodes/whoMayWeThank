@@ -13,13 +13,35 @@
     <header>
 
     </header>
-    <main>
-        <button id="playerName">Submit Name</button>
-        <button id="submitAnswer">Submit Answer</button>
-        <!-- <button id="playerName">Submit</button> -->
-    </main>
+    <div class="container">
+        <div id="popup" class="displayNone">
+            <h1 id="username"></h1>
+            <p>Enter your new username</p>
+            <input type="text" name="username" id="newUserName" placeholder="ex: redmonkey90">
+        </div>
+        <section id="player1" class="userInput">
+            <h1 id="player1Name" class="playerName">Player 1</h1>
+            <p id="player1Score" class="playerScore">0</p>
+            <p id="player1RoundScore" class="playerScore">0</p>
+            <button id="player1NameBtn" class="playerNameBtn">Change Name</button>
+        </section>
+        <main id="quiz">
+            <h1 id="question"></h1>
+            <p class="answer"></p>
+            <p class="answer"></p>
+            <p class="answer"></p>
+            <p class="answer"></p>
+            <p id="round"></p>
+        </main>
+        <section id="player2" class="userInput">
+            <h1 id="player2Name" class="playerName">Player 1</h1>
+            <p id="player2Score" class="playerScore">0</p>
+            <p id="player2RoundScore" class="playerScore">0</p>
+            <button id="player2NameBtn" class="playerNameBtn">Change Name</button>
+        </section>
+    </div>
     <footer>
-
+        <div></div>
     </footer>
 </body>
 </html>
