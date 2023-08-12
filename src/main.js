@@ -5,7 +5,7 @@ class Player {
         this.score = 0;
     }
 }
-// event listener for change name buttons
+/* // event listener for change name buttons
 
 // function to get playerName
 
@@ -19,8 +19,11 @@ class Player {
 
 // player1Score
 
-// player2score
-
+// player2score */
+let player1Score = document.querySelector(`#player1Score`)
+let player2score = ocument.querySelector(`#player2Score`);
+console.log(player1Score.innerText)
+console.log(player2score.innerText)
 // identify active player
 
 // all answers array - with all possible answers
