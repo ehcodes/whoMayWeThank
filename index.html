@@ -7,41 +7,55 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/src/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/src/images/favicon/favicon-16x16.png">
     <link rel="manifest" href="/src/images/favicon/site.webmanifest">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,500&family=Open+Sans&display=swap" rel="stylesheet">
     <title>Who may we Thank?</title>
 </head>
 <body>
-    <header>
-
-    </header>
-    <div class="container">
-        <div id="popup" class="displayNone">
+    <section id="popup" class="displayNone">
+        <div id="popupInner">
             <h1 id="username"></h1>
             <p>Enter your new username</p>
             <input type="text" name="username" id="newUserName" placeholder="ex: redmonkey90">
+            <button id="submitNameBtn">Change Name</button>
+            <button id="cancelNameChngBtn">Cancel</button>
         </div>
-        <section id="player1" class="userInput">
+    </section>
+    <header>
+        <h1>Who may we Thank?</h1>
+        <!-- Options is temporary, will be a hamburger menu/ul with a game reset option and name change option-->
+        <p>Options</p>
+    </header>
+    <main id="container">
+        <section id="player1" class="userStats">
             <h1 id="player1Name" class="playerName">Player 1</h1>
+            <h2>Overall Score</h2>
             <p id="player1Score" class="playerScore">0</p>
+            <h2>Current Round Score</h2>
             <p id="player1RoundScore" class="playerScore">0</p>
-            <button id="player1NameBtn" class="playerNameBtn">Change Name</button>
         </section>
-        <main id="quiz">
-            <h1 id="question"></h1>
-            <p class="answer"></p>
-            <p class="answer"></p>
-            <p class="answer"></p>
-            <p class="answer"></p>
-            <p id="round"></p>
-        </main>
-        <section id="player2" class="userInput">
-            <h1 id="player2Name" class="playerName">Player 1</h1>
+        <section id="quiz">
+            <h1 id="question">Who invented <span id="invention">bla blah blah</span>?</h1>
+            <div class="answerGroup">
+                <p class="answer">Person A</p>
+                <p class="answer">Person B</p>
+            </div>
+            <div class="answerGroup">
+                <p class="answer">Person C</p>
+                <p class="answer">Person D</p>
+            </div>
+            <p id="roundScore"></p>
+        </section>
+        <section id="player2" class="userStats">
+            <h1 id="player2Name" class="playerName">Player 2</h1>
+            <h2>Overall Score</h2>
             <p id="player2Score" class="playerScore">0</p>
+            <h2>Current Round Score</h2>
             <p id="player2RoundScore" class="playerScore">0</p>
-            <button id="player2NameBtn" class="playerNameBtn">Change Name</button>
         </section>
-    </div>
-    <footer>
-        <div></div>
-    </footer>
+    </main>
 </body>
 </html>
