@@ -96,90 +96,88 @@ let answers = [
 ];
 
 console.log(answers.length);
-// class cardset
-// card.invention
-// card.rightAnswer
-// card.moreInfoLink
-// card.answerIndex
-// card.wrongAnswer1 - empty initially
-// card.wrongAnswer2 - empty initially
-// card.wrongAnswer3 - empty initially
-
-class CardSet {
-  constructor(
-    rightAnswer,
-    invention,
-    moreInfoLink,
-    wrongAnswer1,
-    wrongAnswer2,
-    wrongAnswer3
-  ) {
-    this.rightAnswer = rightAnswer;
-    this.invention = invention;
-    this.moreInfoLink = moreInfoLink;
-    this.wrongAnswer1 = wrongAnswer1;
-    this.wrongAnswer2 = wrongAnswer2;
-    this.wrongAnswer3 = wrongAnswer3;
-  }
-}
 
 // function to loop through the answers array and create 30 cardsets for the current game
 // return an array of cardsets
 
 //function to generate an index number between 0 and 53 at random
-function generateRandomCardIndex(max) {
-  return Math.floor(Math.random() * max);
-}
 
-// function to split the answers strings into arrays
-function getGameAnswers() {
-  let splitAnswers = [];
-  for (const el of answers) {
-    let elArr = el.split(`;`);
-    splitAnswers.push(elArr);
-  }
-  return splitAnswers;
-}
-// function to randomly identify the 30 card set for the current game
-  // added parameters to make funtion reusable for also creating a random index for the wrong answers
-function createCardIndexArr(length,max) {
-  let cardIndexArr = [];
-  cardIndexGenerationLoop: for (let i = 0; i < 999; i++) {
-    let randomCardIndex = generateRandomCardIndex(max);
-    if (cardIndexArr.includes(randomCardIndex) === false) {
-      cardIndexArr.push(randomCardIndex);
-    }
-    if (cardIndexArr.length >= length) {
-      break cardIndexGenerationLoop;
+function stageGame(){
+  class CardSet {
+    constructor(
+      rightAnswer,
+      invention,
+      moreInfoLink,
+      wrongAnswer1,
+      wrongAnswer2,
+      wrongAnswer3
+    ) {
+      this.rightAnswer = rightAnswer;
+      this.invention = invention;
+      this.moreInfoLink = moreInfoLink;
+      this.wrongAnswer1 = wrongAnswer1;
+      this.wrongAnswer2 = wrongAnswer2;
+      this.wrongAnswer3 = wrongAnswer3;
     }
   }
-  return cardIndexArr;
-}
 
-/* // validate card index array is functional
-console.log(createCardIndexArr()); */
-let splitAnswersArr = getGameAnswers();
-let indexArr = createCardIndexArr(30,54);
-let gameSet = [];
-
-// function to filter answers array to ensure no duplicate values in cardset
-function filterAnswers(answersArray,currentElement){
-  return answersArray.filter(
-    (splitAnswer) => splitAnswer !== currentElement
-  );
-}
-// function to assign the 30 card set for the current game
-function createCardSet() {
-  for (let i = 0; i < indexArr.length; i++) {
-    let currEl = splitAnswersArr[`${indexArr[i]}`];
-    let wrongAnswersArr = filterAnswers(splitAnswersArr,currEl)
-    let newCardSet = new CardSet(currEl[0], currEl[1], currEl[2],wrongAnswersArr[0][0],wrongAnswersArr[1][0],wrongAnswersArr[2][0]);
-    gameSet.push(newCardSet);
+  function generateRandomCardIndex(max) {
+    return Math.floor(Math.random() * max);
   }
+  
+  // function to split the answers strings into arrays
+  function getGameAnswers() {
+    let splitAnswers = [];
+    for (const el of answers) {
+      let elArr = el.split(`;`);
+      splitAnswers.push(elArr);
+    }
+    return splitAnswers;
+  }
+  // function to randomly identify the 30 card set for the current game
+    // added parameters to make funtion reusable for also creating a random index for the wrong answers
+  function createCardIndexArr(length,max) {
+    let cardIndexArr = [];
+    cardIndexGenerationLoop: for (let i = 0; i < 999; i++) {
+      let randomCardIndex = generateRandomCardIndex(max);
+      if (cardIndexArr.includes(randomCardIndex) === false) {
+        cardIndexArr.push(randomCardIndex);
+      }
+      if (cardIndexArr.length >= length) {
+        break cardIndexGenerationLoop;
+      }
+    }
+    return cardIndexArr;
+  }
+  
+  /* // validate card index array is functional
+  console.log(createCardIndexArr()); */
+  let splitAnswersArr = getGameAnswers();
+  let indexArr = createCardIndexArr(30,54);
+  let gameSet = [];
+  
+  // function to filter answers array to ensure no duplicate values in cardset
+  function filterAnswers(answersArray,currentElement){
+    return answersArray.filter(
+      (splitAnswer) => splitAnswer !== currentElement
+    );
+  }
+  // function to assign the 30 card set for the current game
+  function createCardSet() {
+    for (let i = 0; i < indexArr.length; i++) {
+      let currEl = splitAnswersArr[`${indexArr[i]}`];
+      let wrongAnswersArr = filterAnswers(splitAnswersArr,currEl)
+      let newCardSet = new CardSet(currEl[0], currEl[1], currEl[2],wrongAnswersArr[0][0],wrongAnswersArr[1][0],wrongAnswersArr[2][0]);
+      gameSet.push(newCardSet);
+    }
+  }
+  createCardSet()
+  
+  return gameSet;
 }
 
-let currentGameSet = createCardSet();
-console.log(gameSet);
+stageGame()
+console.log(stageGame());
 
 // function to start game round
 
