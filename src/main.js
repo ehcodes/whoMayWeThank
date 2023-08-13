@@ -1,10 +1,3 @@
-// class player
-class Player {
-  constructor(plaryName) {
-    this.plaryName = plaryName;
-    this.score = 0;
-  }
-}
 /*
 THIS FUNCTIONALITY WILL BE ADDED LAST, TIME PERMITTING
 // event listener for change name buttons
@@ -19,9 +12,22 @@ THIS FUNCTIONALITY WILL BE ADDED LAST, TIME PERMITTING
 
 // call function to assign player2Name
  */
-// player1Score
 
-// player2score
+// class player
+class Player {
+  constructor(playerName) {
+    this.playerName = playerName;
+    this.score = 0;
+  }
+}
+
+// player1
+let player1 = new Player(`Player 1`)
+// console.log(player1)
+
+// player2
+let player2 = new Player(`Player 2`)
+// console.log(player2)
 
 let player1Score = document.querySelector(`#player1Score`);
 let player2score = document.querySelector(`#player2Score`);
@@ -174,6 +180,7 @@ function createCardSet() {
 
 let currentGameSet = createCardSet();
 console.log(gameSet);
+
 // function to start game round
 
 // array to store all remaing card objects for this game
