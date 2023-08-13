@@ -5,7 +5,9 @@ class Player {
     this.score = 0;
   }
 }
-/* // event listener for change name buttons
+/*
+THIS FUNCTIONALITY WILL BE ADDED LAST, TIME PERMITTING
+// event listener for change name buttons
 
 // function to get playerName
 
@@ -16,15 +18,16 @@ class Player {
 // call function to assign player1Name
 
 // call function to assign player2Name
-
+ */
 // player1Score
 
-// player2score */
+// player2score
+
 let player1Score = document.querySelector(`#player1Score`);
 let player2score = document.querySelector(`#player2Score`);
 
-console.log(`player1Score.innerText: ${player1Score.innerText}`);
-console.log(`player2score.innerText: ${player2score.innerText}`);
+// console.log(`player1Score.innerText: ${player1Score.innerText}`);
+// console.log(`player2score.innerText: ${player2score.innerText}`);
 
 // identify active player
 
@@ -149,27 +152,28 @@ function createCardIndexArr(length,max) {
 
 /* // validate card index array is functional
 console.log(createCardIndexArr()); */
+let splitAnswersArr = getGameAnswers();
+let indexArr = createCardIndexArr(30,54);
+let gameSet = [];
 
+// function to filter answers array to ensure no duplicate values in cardset
+function filterAnswers(answersArray,currentElement){
+  return answersArray.filter(
+    (splitAnswer) => splitAnswer !== currentElement
+  );
+}
 // function to assign the 30 card set for the current game
 function createCardSet() {
-  let splitAnswersArr = getGameAnswers();
-  let indexArr = createCardIndexArr(30,54);
-  let wrongAnswersIndexArr = createCardIndexArr(29,3);
-  let gameSet = [];
   for (let i = 0; i < indexArr.length; i++) {
     let currEl = splitAnswersArr[`${indexArr[i]}`];
-    let wrongAnswersArr = splitAnswersArr.filter(
-      (splitAnswer) => splitAnswer !== currEl
-    );
-    // need to add the wrong answers to each cardset (using wrongAnswersIndexArr) as well - I think I will split this into multiple functions - this one is becoming too complicated, must simplify it.
-    let newCardSet = new CardSet(currEl[0], currEl[1], currEl[2]/* ,,, */);
+    let wrongAnswersArr = filterAnswers(splitAnswersArr,currEl)
+    let newCardSet = new CardSet(currEl[0], currEl[1], currEl[2],wrongAnswersArr[0][0],wrongAnswersArr[1][0],wrongAnswersArr[2][0]);
     gameSet.push(newCardSet);
   }
-  return gameSet;
 }
 
 let currentGameSet = createCardSet();
-console.log(currentGameSet);
+console.log(gameSet);
 // function to start game round
 
 // array to store all remaing card objects for this game
