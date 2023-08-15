@@ -362,7 +362,7 @@ function stageGame() {
   let indexArr = createCardIndexArr(30, 54);
   /* // validate card index array is functional
   console.log(indexArr); */
-  let stagingGameSet = [(roundTracker = { turn:0, round: 0, winner: undefined })];
+  let stagingGameSet = [(roundTracker = { turn:0, round: 1, winner: undefined })];
   
   // function to filter answers array to ensure no duplicate values in cardset
   function filterAnswers(originalArray, element) {
@@ -419,7 +419,9 @@ function clearPopup(){
 };
 
 let gameSet = stageGame();
-let gameRound = gameSet[0][`round`];
+let gameRound = gameSet[gameSet.length-1][`round`];
+currentRound.innerText = gameRound;
+
 let roundSet = createRoundSet();
 let turn = gameSet[gameSet.length-1][`turn`];
 
