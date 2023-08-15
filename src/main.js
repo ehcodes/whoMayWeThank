@@ -23,10 +23,9 @@ class Player {
   }
 }
 
-// player1
+// create player1
 let player1 = new Player(`Player 1`);
-
-// player2
+// create player2
 let player2 = new Player(`Player 2`);
 
 let player1Score = document.querySelector(`#player1Score`);
@@ -36,7 +35,7 @@ let player2RoundScore = document.querySelector(`#player2RoundScore`);
 let playerRoundScores = document.querySelectorAll(`.playerRoundScore`);
 
 let popUp = document.querySelector(`#popup`);
-let popUpInner = document.querySelector(`#popUpInner`);
+let popUpInner = document.querySelector(`#popupInner`);
 let gameRules=document.querySelector(`#rules`);
 let startGameButton = document.querySelector(`#startGame`);
 let nextSetButton = document.querySelector(`#nextSet`);
@@ -390,6 +389,7 @@ function stageGame() {
 function beginGame() {
   popUp.classList.add(`displayNone`);
   question.classList.remove(`displayNone`);
+  popUpInner.classList.replace(`preGamePopupInner`,`midGamePopupInner`);
   popUpInner.classList.replace(`preGamePopupInner`,`midGamePopupInner`);
   gameRules.remove();
   beginSet();
