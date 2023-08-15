@@ -36,6 +36,7 @@ let player2RoundScore = document.querySelector(`#player2RoundScore`);
 let playerRoundScores = document.querySelectorAll(`.playerRoundScore`);
 
 let popUp = document.querySelector(`#popup`);
+let popUpInner = document.querySelector(`#popUpInner`);
 let gameRules=document.querySelector(`#rules`);
 let startGameButton = document.querySelector(`#startGame`);
 let nextSetButton = document.querySelector(`#nextSet`);
@@ -358,8 +359,7 @@ function stageGame() {
   let indexArr = createCardIndexArr(30, 54);
   /* // validate card index array is functional
   console.log(indexArr); */
-
-  let gameSet = [(roundTracker = { turn:0, round: 0, winner: undefined })];
+  let stagingGameSet = [(roundTracker = { turn:0, round: 0, winner: undefined })];
   
   // function to filter answers array to ensure no duplicate values in cardset
   function filterAnswers(originalArray, element) {
@@ -380,19 +380,21 @@ function stageGame() {
         wrongAnswersArr[1][2],
         wrongAnswersArr[2][2]
       );
-      gameSet.push(newCardSet);
+      stagingGameSet.push(newCardSet);
     }
   }
   createCardSet();
-  return gameSet;
+  return stagingGameSet;
 }
 
 function beginGame() {
   popUp.classList.add(`displayNone`);
   question.classList.remove(`displayNone`);
+  popUpInner.classList.replace(`preGamePopupInner`,`midGamePopupInner`);
   gameRules.remove();
   beginSet();
 }
+
 let gameSet = stageGame();
 let turn = gameSet[0][`turn`];
 let gameRound = gameSet[0][`round`];
@@ -428,7 +430,7 @@ function resetAnswerCards(){
 
 function isolateCardSet() {
   if(gameSet.length>0){
-    let cardSet = gameSet.pop();
+    let cardSet = stagingGameSet.pop();
     return cardSet;
   }
 }
