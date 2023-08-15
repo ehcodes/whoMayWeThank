@@ -472,9 +472,9 @@ function createRoundSet() {
 
 function isolateCardSet() {
   console.log(`function: : isolateCardSet`);
-  if(stagingGameSet.length>0){
-    let cardSet = stagingGameSet.shift();
-    console.log(stagingGameSet)
+  if(gameSet.length>0){
+    let cardSet = gameSet.shift();
+    console.log(gameSet)
     return cardSet;
   }else{
     endGame();
