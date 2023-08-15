@@ -38,6 +38,7 @@ let popUp = document.querySelector(`#popup`);
 let popUpInner = document.querySelector(`#popupInner`);
 let popupStatement = document.querySelector(`#popupStatement`);
 let gameRules=document.querySelector(`#rules`);
+let buttons = document.querySelectorAll(`button`);
 let startGameButton = document.querySelector(`#startGame`);
 let nextSetButton = document.querySelector(`#nextSet`);
 let nextRoundButton = document.querySelector(`#nextRound`);
@@ -388,12 +389,17 @@ function stageGame() {
 }
 
 function beginGame() {
-  popUp.classList.add(`displayNone`);
   question.classList.remove(`displayNone`);
-  popUpInner.classList.replace(`preGamePopupInner`,`midGamePopupInner`);
+  resetGameButton.classList.remove(`displayNone`);
   popUpInner.classList.replace(`preGamePopupInner`,`midGamePopupInner`);
   gameRules.remove();
   beginSet();
+}
+
+function popupUpdate(message,button){
+  popupStatement.innerText=message;
+  button.classList.remove('displayNone');
+  popUp.classList.remove('displayNone');
 }
 
 let gameSet = stageGame();
@@ -404,10 +410,13 @@ let roundSet = createRoundSet();
 
 // function to start game round
 function beginSet() {
+  endOrContinueRound(roundSet);
+  checkCardClicks(roundSet);
+}
+function newRound(){
   gameRound += 1;
   currentRound.innerText = gameRound;
-  populateRoundData(roundSet);
-  checkCardClicks(roundSet);
+  beginSet();
 }
 
 function resetRoundScores(){
@@ -418,14 +427,15 @@ function resetRoundScores(){
   })
 }
 function resetAnswerCards(){
-  answerCards.forEach((el)=>{
-    if(el.classList.contains(`correct`)){
-      el.classList.remove(`correct`);
-      el.classList.remove(`greenShadow`);
-    }else if(el.classList.contains(`redShadow`)){
-      el.classList.remove(`redShadow`);
+  console.log(answerCards)
+  answerCards.forEach((answerCard)=>{
+    if(answerCard.classList.contains(`correct`)){
+      answerCard.classList.remove(`greenShadow`);
+      console.log(`green shadow removed`)
+    }else if(answerCard.classList.contains(`redShadow`)){
+      answerCard.classList.remove(`redShadow`);
+      console.log(`red shadow removed`)
     }
-    el.removeEventListener('click');
   })
 }
 
@@ -441,15 +451,15 @@ function createRoundSet() {
 }
 
 function isolateCardSet() {
-  if(gameSet.length>1){
+  if(gameSet.length>3){
     let cardSet = gameSet.pop();
     return cardSet;
   }else{
-    endGame()
+    endGame();
   }
 }
 
-function populateRoundData(set) {
+function populateSetData(set) {
   let cardIndex = createCardIndexArr(4, 4);
   console.log(set[0][`rightAnswer`]);
   invention.innerText=set[0][`invention`];
@@ -463,8 +473,7 @@ function populateRoundData(set) {
 function checkCardClicks(set){
   answerCards.forEach((el)=>{
     el.addEventListener(`click`, ()=>{
-      console.log(turn)
-      // identify active player
+      // turn is used to identify the active player
       turn+=1;
       if (el.classList.contains(`correct`)){
         addGreenShadow(el);
@@ -484,32 +493,35 @@ function addRedShadow(element){
   element.classList.add(`redShadow`);
 }
 
-function updatePlayerScore(set){
+function determinePlayer(){
   if(turn%2===0){
-    player2.roundScore+=1;
-    console.log(set)
-    player2.winningSets.push(set.shift())
-    console.log(set)
-    console.log(player2.winningSets)
+    return player2
+  }else{
+    return player1
+  }
+}
+function updatePlayerScore(set){
+  let roundWinner = determinePlayer();
+  msg = `${roundWinner.playerName} won this set.`
+  popupUpdate(msg,nextSetButton);
+  roundWinner.roundScore+=1;
+  roundWinner.winningSets.push(set.shift());
+  if(roundWinner==player2){
     player2RoundScore.innerText = player2.roundScore;
   }else{
-    player1.roundScore+=1;
-    console.log(set)
-    player1.winningSets.push(set.shift())
-    console.log(set)
-    console.log(player1.winningSets)
     player1RoundScore.innerText = player1.roundScore;
   }
-  // endOrContinueRound(set)
 }
 
 function endOrContinueRound(set) {
   if(set.length===0){
+    console.log("beginNewRound");
     round+=1;
     resetRoundScores();
-    resetAnswerCards();
   }else{
-    populateRoundData(set);// continue round?
+    populateSetData(set);
+    console.log("populateSetData");
+    // continue round?
   }
 }
 
@@ -533,12 +545,21 @@ function endGame() {
     let winner=player2.playerName
     let loser=player1.playerName
   }
-  popupStatement.innerText=`${winner} is the victor! Better luck next time ${loser}`;
+  popupStatement.innerText=`${winner} is the victor! Better luck next time ${loser}.`;
   // will change this to update cardset once that function has been created
 }
 
 
 startGameButton.addEventListener('click', beginGame);
 nextSetButton.addEventListener('click', beginSet);
-// nextRoundButton.addEventListener('click', beginGame);
-resetGameButton.addEventListener('click', location.reload);
+nextRoundButton.addEventListener('click', newRound);
+resetGameButton.addEventListener('click', window.location.reload.bind(window.location));
+
+buttons.forEach((el)=>{
+  // console.log(el.attributes.id.nodeValue)
+  el.addEventListener('click', ()=>{
+    resetAnswerCards();
+    el.classList.add(`displayNone`);
+    popUp.classList.add(`displayNone`);
+  });
+})
