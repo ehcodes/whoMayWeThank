@@ -421,7 +421,7 @@ function clearPopupButtons(){
 let gameSet = stageGame();
 let turn = gameSet[0][`turn`];
 let gameRound = gameSet[0][`round`];
-
+let roundSet = createRoundSet();
 
 // function to start game round
 function beginSet() {
