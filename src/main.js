@@ -457,7 +457,6 @@ function beginGame() {
         if (el.classList.contains(`correct`)){
           addGreenShadow(el);
           updatePlayerScore(set);
-          appendMoreInforLink(el)
         }else{
           addRedShadow(el);
         }
@@ -471,15 +470,6 @@ function beginGame() {
 
   function addRedShadow(element){
     element.classList.add(`redShadow`);
-  }
-  function appendMoreInforLink(element){
-    let moreInfoSpan = document.createElement(`span`);
-    clickSpan.innerHTL = 'Click '
-    <a href="${element.moreInfoLink}">here</a>
-    moreInfoSpan.innerHTL' to learn more.';
-    element.insertAdjacentElement("beforeend", moreInfoP);
-    element.insertAdjacentElement("beforeend", moreInfoP);
-    element.insertAdjacentElement("beforeend", moreInfoP);
   }
 
   function updatePlayerScore(set){
@@ -512,15 +502,19 @@ function beginGame() {
   }
 
   // this function will be where moreInfoLink is added - time permitting
-  // function revealAnswer() {}
+  // function appendMoreInforLink(element){
+  //   console.log(element)
+  //   let moreInfoSpan = document.createElement(`span`);
+  //   moreInfoSpan.innerText = 'Click the following link to ';
+  //   let moreInfoAnchor = document.createElement(`a`);
+  //   moreInfoAnchor.setAttribute('href',element.moreInfoLink);
+  //   moreInfoAnchor.innerText = 'learn more.';
+  //   element.insertAdjacentElement("beforeend", moreInfoSpan);
+  //   moreInfoAnchor.insertAdjacentElement("beforeend", moreInfoSpan);
+  // }
 
   function endGame() {
-    gameSet[0], [`round`] % 3 === 0 ? console.log(`round has completed`) : null; // will change this to update cardset once that function has been created
+    round % 3 === 0 ? console.log(`round has completed`) : null; // will change this to update cardset once that function has been created
   }
-  // array to store all remaing card objects for this game
-
-  // function to loop through all possible answers and assign them to card.wrongAnswers
-  // ensure none of the selected answers is the same as the right answer.
-  // ensure none of the selected answers is the same as the other wrong answers.
 }
 beginGame();

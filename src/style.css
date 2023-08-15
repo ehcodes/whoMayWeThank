@@ -1,14 +1,14 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    display: flex;
-    flex-flow: column nowrap;
-    font: 14px 'Open Sans', sans-serif;
-    text-align: center;
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  font: 14px "Open Sans", sans-serif;
+  text-align: center;
 }
 
 h1,
@@ -16,123 +16,150 @@ h2,
 h3,
 h4,
 h5,
-h6{
-    font: 'Bricolage Grotesque', sans-serif;
+h6,
+button {
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
-header{
-    display: flex;
-    flex-flow: row nowrap;
-    align-items:center;
-    justify-content: space-between;
-    background-color: #5AF;
-    color:#fff;
-    text-align:center;
-    padding:1.5rem;
+header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #5af;
+  color: #fff;
+  text-align: center;
+  padding: 1.5rem;
 }
 
-#container{
-    margin:0 auto;
-    display: flex;
-    flex-flow: row nowrap;
+#container {
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
-.displayNone{
-    display:none!important;
+.displayNone {
+  display: none !important;
 }
 
-#popup{
-    position: absolute;
-    width:100vw;
-    height: 100vh;
-    background-color: rgba(255, 255, 255,.7);
+#popup {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
-#popupInner{
-    width: 60vw;
-    height: 60vh;
-    margin: 20vh 20vw;
-    background-color: rgb(237, 245, 253);
-    padding:15vh 15vw;
-    border-radius: 25px;
-    box-shadow: 0px 0px 20px 10px rgb(131, 161, 198);
+#popupInner {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  width: 60vw;
+  height: 60vh;
+  padding: 4rem 10rem;
+  margin: 20vh 20vw;
+  background-color: rgb(237, 245, 253);
+  border-radius: 25px;
+  box-shadow: 0px 0px 20px 10px rgb(131, 161, 198);
 }
 
-button{
-    margin:0 auto;
+#rules {
+  margin: 0 auto;
+  font-size: 1.3rem;
 }
 
-.userStats{
-    min-width: 20vw;
-    border:1px solid red;
-    padding:2rem;
+#rules h2 {
+  font-size: 3rem;
+}
+
+#rules ul {
+  text-align: left;
+  padding: 1.5rem;
+}
+
+button {
+  font-size: 1.2rem;
+  margin: 1.5rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 25px;
+  border: 0;
+  background-color: rgb(85, 170, 255);
+  color: #fff;
+  font-weight: bold;
+  letter-spacing: 0.2rem;
+}
+
+.userStats {
+  min-width: 20vw;
+  border: 1px solid red;
+  padding: 2rem;
 }
 
 .userStats h1 {
-    padding-bottom: 1rem;
-    font-size: 1.8rem;
+  padding-bottom: 1rem;
+  font-size: 1.8rem;
 }
 
 .userStats h2 {
-    padding-top: 1rem;
-    font-size: 1.3rem;
+  padding-top: 1rem;
+  font-size: 1.3rem;
 }
 
 p {
-    padding-top: 1rem;
-    font-size: 1.714rem;
+  padding-top: 1rem;
+  font-size: 1.714rem;
 }
 
-#quiz{
-    display: flex;
-    flex-flow: row wrap;
-    align-items:center;
-    justify-content: center;
-    min-width: 50vw;
-    height:fit-content;
-    border:1px solid blue;
-    gap:2.5%;
-    padding:2rem;
+#quiz {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  min-width: 50vw;
+  height: fit-content;
+  border: 1px solid blue;
+  gap: 2.5%;
+  padding: 2rem;
 }
 
-#quiz h2{
-    padding-top:2rem;
-    min-width:100%;
+#quiz h2 {
+  padding-top: 2rem;
+  min-width: 100%;
 }
 
-#quiz p{
-    padding-top:0;
+#quiz p {
+  padding-top: 0;
 }
 
-#question{
-    color: rgb(85, 170, 255);
-    padding-bottom:2rem;
-    font-size:3rem;
-    width:100%;
+#question {
+  color: rgb(85, 170, 255);
+  padding-bottom: 2rem;
+  font-size: 3rem;
+  width: 100%;
 }
 
-.answerGroup{
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    font-size:2.5rem;
+.answerGroup {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  font-size: 2.5rem;
 }
 
-.answer{
-    display: flex;
-    align-items:center;
-    justify-content: center;
-    background-color:rgba(85, 170, 255,.2);
-    box-shadow: 0px 0px 10px 10px rgba(85, 170, 255,.2);
-    height:250px;
-    width:45%;
-    border-radius: 40px;
-    margin:2.5%;
+.answer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(85, 170, 255, 0.2);
+  box-shadow: 0px 0px 10px 10px rgba(85, 170, 255, 0.2);
+  height: 250px;
+  width: 45%;
+  border-radius: 40px;
+  margin: 2.5%;
 }
 
-.greenShadow{
-    box-shadow: 0px 0px 10px 10px rgba(9, 250, 33, 0.4);
+.greenShadow {
+  box-shadow: 0px 0px 10px 10px rgba(9, 250, 33, 0.4);
 }
-.redShadow{
-    box-shadow: 0px 0px 10px 10px rgba(255, 84, 84, 0.4);
+.redShadow {
+  box-shadow: 0px 0px 10px 10px rgba(255, 84, 84, 0.4);
 }

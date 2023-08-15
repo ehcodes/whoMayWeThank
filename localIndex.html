@@ -10,24 +10,41 @@
     <link rel="stylesheet" type="text/css" href="/src/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,500&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <title>Who may we Thank?</title>
     <script defer src="/src/main.js"></script>
 </head>
-<body>
-    <!-- 
-    THIS FUNCTIONALITY WILL BE ADDED LAST, TIME PERMITTING
-    <section id="popup" class="displayNone">
+<body>    
+    <section id="popup">
         <div id="popupInner">
-            <h1 id="username"></h1>
-            <p>Enter your new username</p>
-            <input type="text" name="username" id="newUserName" placeholder="ex: redmonkey90">
-            <button id="submitNameBtn">Change Name</button>
-            <button id="cancelNameChngBtn">Cancel</button>
+            <h1 id="popupStatement"></h1>
+            <section id="rules">
+                <h2>The Rules</h2>
+                <ul>
+                    <li>Player 1 always goes first.</li>
+                    <li>The game ends after 10 rounds.</li>
+                    <li>There are 3 questions per round.</li>
+                    <li>A round ends after all 3 round questions have been answered correctly.</li>
+                    <li>The game ends after all 30 game questions have been answered correctly.</li>
+                    <li>The game can be reset anytime after a question is answered correctly.</li>
+                </ul>
+                <button id="startGame">Start Game</button>
+            </section>
+            <button id="popupNextSet" class="displayNone">Next Set</button>
+            <button id="popupNextRound" class="displayNone">Next Round</button>
+            <button id="popupReset" class="displayNone">Restart</button>
+            <!--
+                THIS FUNCTIONALITY WILL BE ADDED LAST, TIME PERMITTING 
+                <h1 id="username"></h1>
+                <p>Enter your new username</p>
+                <input type="text" name="username" id="newUserName" placeholder="ex: redmonkey90">
+                <button id="submitNameBtn">Change Name</button>
+                <button id="cancelNameChngBtn">Cancel</button>
+            -->
         </div>
     </section>
-    -->
+   
     <header>
         <h1>Who may we Thank?</h1>
         <!-- 
