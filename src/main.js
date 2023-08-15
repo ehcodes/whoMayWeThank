@@ -35,17 +35,16 @@ let player2Score = document.querySelector(`#player2Score`);
 let player2RoundScore = document.querySelector(`#player2RoundScore`);
 let playerRoundScores = document.querySelectorAll(`.playerRoundScore`);
 
-let popUp = document.querySelector(`#popup`)
-
+let popUp = document.querySelector(`#popup`);
+let gameRules=document.querySelector(`#rules`);
 let startGameButton = document.querySelector(`#startGame`);
+let nextSetButton = document.querySelector(`#nextSet`);
+let nextRoundButton = document.querySelector(`#nextRound`);
+let resetGameButton = document.querySelector(`#resetGame`);
+let question = document.querySelector(`#question`);
 let invention = document.querySelector(`#invention`);
 let answerCards = document.querySelectorAll(`.answer`);
 let currentRound = document.querySelector(`#currentRound`);
-
-startGameButton.addEventListener('click', beginGame);
-// nextSetButton.addEventListener('click', beginGame);
-// nextRoundButton.addEventListener('click', beginGame);
-// resetGameButton.addEventListener('click', beginGame);
 
 // all answers array - with all possible answers
 let answers = [
@@ -303,7 +302,7 @@ let answers = [
   [
     `Laser Fuel`,
     `https://patents.justia.com/patent/4011116`,
-    `Lester Lee`
+    `Lester Lee`,
   ],
   [
     `Gamma Electric Cells`,
@@ -389,137 +388,144 @@ function stageGame() {
 }
 
 function beginGame() {
-  popUp.classList.add(`displayNone`)
-  let gameSet = stageGame();
-  let turn = gameSet[0][`turn`]
-  let gameRound = gameSet[0][`round`]
+  popUp.classList.add(`displayNone`);
+  question.classList.remove(`displayNone`);
+  gameRules.remove();
   beginSet();
+}
+let gameSet = stageGame();
+let turn = gameSet[0][`turn`];
+let gameRound = gameSet[0][`round`];
 
-  // function to start game round
-  function beginSet() {
-    let roundSet = createRoundSet();
-    let currentSet = roundSet[0]
-    gameRound += 1;
-    currentRound.innerText = gameRound;
-    populateRoundData(roundSet);
-    checkCardClicks(roundSet);
-  }
+let roundSet = createRoundSet();
 
-  function resetRoundScores(){
-    player1.roundScore = 0;
-    player2.roundScore = 0;
-    playerRoundScores.forEach((el)=>{
-      el.innerText = 0;
-    })
-  }
-  function resetAnswerCards(){
-    answerCards.forEach((el)=>{
-      if(el.classList.contains(`correct`)){
-        el.classList.remove(`correct`);
-        el.classList.remove(`greenShadow`);
-      }else if(el.classList.contains(`redShadow`)){
-        el.classList.remove(`redShadow`);
-      }
-      el.removeEventListener('click');
-    })
-  }
+// function to start game round
+function beginSet() {
+  gameRound += 1;
+  currentRound.innerText = gameRound;
+  populateRoundData(roundSet);
+  checkCardClicks(roundSet);
+}
 
-  function isolateCardSet() {
-    if(gameSet.length>0){
-      let cardSet = gameSet.pop();
-      return cardSet;
+function resetRoundScores(){
+  player1.roundScore = 0;
+  player2.roundScore = 0;
+  playerRoundScores.forEach((el)=>{
+    el.innerText = 0;
+  })
+}
+function resetAnswerCards(){
+  answerCards.forEach((el)=>{
+    if(el.classList.contains(`correct`)){
+      el.classList.remove(`correct`);
+      el.classList.remove(`greenShadow`);
+    }else if(el.classList.contains(`redShadow`)){
+      el.classList.remove(`redShadow`);
     }
-  }
+    el.removeEventListener('click');
+  })
+}
 
-  function createRoundSet() {
-    return [isolateCardSet(), isolateCardSet(), isolateCardSet()];
-  }
-
-  function isolateCardSet() {
-    if(gameSet.length>0){
-      let cardSet = gameSet.pop();
-      return cardSet;
-    }
-  }
-
-  function populateRoundData(set) {
-    let cardIndex = createCardIndexArr(4, 4);
-    console.log(set[0][`rightAnswer`]);
-    invention.innerText=set[0][`invention`];
-    answerCards[cardIndex[0]].innerText=set[0][`rightAnswer`];
-    answerCards[cardIndex[0]].classList.add(`correct`);
-    answerCards[cardIndex[1]].innerText=set[0][`wrongAnswer1`];
-    answerCards[cardIndex[2]].innerText=set[0][`wrongAnswer2`];
-    answerCards[cardIndex[3]].innerText=set[0][`wrongAnswer3`];
-  }
-
-  function checkCardClicks(set){
-    answerCards.forEach((el)=>{
-      el.addEventListener(`click`, ()=>{
-        console.log(turn)
-        // identify active player
-        turn+=1;
-        console.log(turn)
-        if (el.classList.contains(`correct`)){
-          addGreenShadow(el);
-          updatePlayerScore(set);
-        }else{
-          addRedShadow(el);
-        }
-      })
-    })
-  }
-
-  function addGreenShadow(element){
-    element.classList.add(`greenShadow`);
-  }
-
-  function addRedShadow(element){
-    element.classList.add(`redShadow`);
-  }
-
-  function updatePlayerScore(set){
-    if(turn%2===0){
-      player2.roundScore+=1;
-      console.log(set)
-      player2.winningSets.push(set.shift())
-      console.log(set)
-      console.log(player2.winningSets)
-      player2RoundScore.innerText = player2.roundScore;
-    }else{
-      player1.roundScore+=1;
-      console.log(set)
-      player1.winningSets.push(set.shift())
-      console.log(set)
-      console.log(player1.winningSets)
-      player1RoundScore.innerText = player1.roundScore;
-    }
-    // endOrContinueRound(set)
-  }
-
-  function endOrContinueRound(set) {
-    if(set.length===0){
-      round+=1;
-      resetRoundScores();
-      resetAnswerCards();
-    }else{
-      populateRoundData(set);// continue round?
-    }
-  }
-
-  // this function will be where moreInfoLink is added - time permitting
-  // function appendMoreInforLink(element){
-  //   console.log(element)
-  //   let moreInfoSpan = document.createElement(`span`);
-  //   moreInfoSpan.innerText = 'Click the following link to ';
-  //   let moreInfoAnchor = document.createElement(`a`);
-  //   moreInfoAnchor.setAttribute('href',element.moreInfoLink);
-  //   moreInfoAnchor.innerText = 'learn more.';
-  //   element.insertAdjacentElement("beforeend", moreInfoSpan);
-  //   moreInfoAnchor.insertAdjacentElement("beforeend", moreInfoSpan);
-  // }
-
-  function endGame() {
-    round % 3 === 0 ? console.log(`round has completed`) : null; // will change this to update cardset once that function has been created
+function isolateCardSet() {
+  if(gameSet.length>0){
+    let cardSet = gameSet.pop();
+    return cardSet;
   }
 }
+
+function createRoundSet() {
+  return [isolateCardSet(), isolateCardSet(), isolateCardSet()];
+}
+
+function isolateCardSet() {
+  if(gameSet.length>0){
+    let cardSet = gameSet.pop();
+    return cardSet;
+  }
+}
+
+function populateRoundData(set) {
+  let cardIndex = createCardIndexArr(4, 4);
+  console.log(set[0][`rightAnswer`]);
+  invention.innerText=set[0][`invention`];
+  answerCards[cardIndex[0]].innerText=set[0][`rightAnswer`];
+  answerCards[cardIndex[0]].classList.add(`correct`);
+  answerCards[cardIndex[1]].innerText=set[0][`wrongAnswer1`];
+  answerCards[cardIndex[2]].innerText=set[0][`wrongAnswer2`];
+  answerCards[cardIndex[3]].innerText=set[0][`wrongAnswer3`];
+}
+
+function checkCardClicks(set){
+  answerCards.forEach((el)=>{
+    el.addEventListener(`click`, ()=>{
+      console.log(turn)
+      // identify active player
+      turn+=1;
+      if (el.classList.contains(`correct`)){
+        addGreenShadow(el);
+        updatePlayerScore(set);
+      }else{
+        addRedShadow(el);
+      }
+    })
+  })
+}
+
+function addGreenShadow(element){
+  element.classList.add(`greenShadow`);
+}
+
+function addRedShadow(element){
+  element.classList.add(`redShadow`);
+}
+
+function updatePlayerScore(set){
+  if(turn%2===0){
+    player2.roundScore+=1;
+    console.log(set)
+    player2.winningSets.push(set.shift())
+    console.log(set)
+    console.log(player2.winningSets)
+    player2RoundScore.innerText = player2.roundScore;
+  }else{
+    player1.roundScore+=1;
+    console.log(set)
+    player1.winningSets.push(set.shift())
+    console.log(set)
+    console.log(player1.winningSets)
+    player1RoundScore.innerText = player1.roundScore;
+  }
+  // endOrContinueRound(set)
+}
+
+function endOrContinueRound(set) {
+  if(set.length===0){
+    round+=1;
+    resetRoundScores();
+    resetAnswerCards();
+  }else{
+    populateRoundData(set);// continue round?
+  }
+}
+
+// this function will be where moreInfoLink is added - time permitting
+// function appendMoreInforLink(element){
+//   console.log(element)
+//   let moreInfoSpan = document.createElement(`span`);
+//   moreInfoSpan.innerText = 'Click the following link to ';
+//   let moreInfoAnchor = document.createElement(`a`);
+//   moreInfoAnchor.setAttribute('href',element.moreInfoLink);
+//   moreInfoAnchor.innerText = 'learn more.';
+//   element.insertAdjacentElement("beforeend", moreInfoSpan);
+//   moreInfoAnchor.insertAdjacentElement("beforeend", moreInfoSpan);
+// }
+
+function endGame() {
+  round % 3 === 0 ? console.log(`round has completed`) : null; // will change this to update cardset once that function has been created
+}
+
+
+startGameButton.addEventListener('click', beginGame);
+nextSetButton.addEventListener('click', beginSet);
+// nextRoundButton.addEventListener('click', beginGame);
+// resetGameButton.addEventListener('click', beginGame);

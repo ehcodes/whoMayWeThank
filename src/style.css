@@ -51,13 +51,13 @@ header {
 
 #popupInner {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  width: 60vw;
-  height: 60vh;
+  max-width: 60vw;
+  min-height: fit-content;
   padding: 4rem 10rem;
-  margin: 20vh 20vw;
+  margin: 20vh auto;
   background-color: rgb(237, 245, 253);
   border-radius: 25px;
   box-shadow: 0px 0px 20px 10px rgb(131, 161, 198);
@@ -74,7 +74,7 @@ header {
   font-size: 3rem;
   text-shadow: 4px 2px #000, 4px 2px #000, 4px 2px #000, 4px 2px #000;
 }
-#rules h2 {
+#popupInner h2 {
   font-size: 2.5rem;
 }
 
@@ -96,8 +96,11 @@ button {
 }
 
 .userStats {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
   min-width: 20vw;
-  border: 1px solid red;
   padding: 2rem;
 }
 
@@ -123,7 +126,6 @@ p {
   justify-content: center;
   min-width: 50vw;
   height: fit-content;
-  border: 1px solid blue;
   gap: 2.5%;
   padding: 2rem;
 }
