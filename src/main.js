@@ -36,6 +36,7 @@ let playerRoundScores = document.querySelectorAll(`.playerRoundScore`);
 
 let popUp = document.querySelector(`#popup`);
 let popUpInner = document.querySelector(`#popupInner`);
+let popupStatement = document.querySelector(`#popupStatement`);
 let gameRules=document.querySelector(`#rules`);
 let startGameButton = document.querySelector(`#startGame`);
 let nextSetButton = document.querySelector(`#nextSet`);
@@ -440,9 +441,11 @@ function createRoundSet() {
 }
 
 function isolateCardSet() {
-  if(gameSet.length>0){
+  if(gameSet.length>1){
     let cardSet = gameSet.pop();
     return cardSet;
+  }else{
+    endGame()
   }
 }
 
@@ -523,11 +526,19 @@ function endOrContinueRound(set) {
 // }
 
 function endGame() {
-  round % 3 === 0 ? console.log(`round has completed`) : null; // will change this to update cardset once that function has been created
+  if(player1.score > player2.score) {
+    let winner=player1.playerName
+    let loser = player2.playerName
+  }else{
+    let winner=player2.playerName
+    let loser=player1.playerName
+  }
+  popupStatement.innerText=`${winner} is the victor! Better luck next time ${loser}`;
+  // will change this to update cardset once that function has been created
 }
 
 
 startGameButton.addEventListener('click', beginGame);
 nextSetButton.addEventListener('click', beginSet);
 // nextRoundButton.addEventListener('click', beginGame);
-// resetGameButton.addEventListener('click', beginGame);
+resetGameButton.addEventListener('click', location.reload);
