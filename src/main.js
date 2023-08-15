@@ -493,13 +493,15 @@ function populateSetData(set) {
   resetAnswerCards();
   let cardIndex = createCardIndexArr(4, 4);
   console.log(cardIndex)
-  set.lenght>0?console.log(set[0][`rightAnswer`]):null
-  invention.innerText=set[0][`invention`];
-  answerCards[cardIndex[0]].innerText=set[0][`rightAnswer`];
-  answerCards[cardIndex[0]].classList.add(`correct`);
-  answerCards[cardIndex[1]].innerText=set[0][`wrongAnswer1`];
-  answerCards[cardIndex[2]].innerText=set[0][`wrongAnswer2`];
-  answerCards[cardIndex[3]].innerText=set[0][`wrongAnswer3`];
+  if(set.length>0){
+    console.log(set[0][`rightAnswer`]);
+    invention.innerText=set[0][`invention`];
+    answerCards[cardIndex[0]].innerText=set[0][`rightAnswer`];
+    answerCards[cardIndex[0]].classList.add(`correct`);
+    answerCards[cardIndex[1]].innerText=set[0][`wrongAnswer1`];
+    answerCards[cardIndex[2]].innerText=set[0][`wrongAnswer2`];
+    answerCards[cardIndex[3]].innerText=set[0][`wrongAnswer3`];
+  }
 }
 
 function checkCardClicks(set){
