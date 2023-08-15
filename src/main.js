@@ -432,6 +432,7 @@ function beginSet() {
   checkCardClicks(roundSet);
   endOrContinueRound(roundSet);
 }
+
 function newRound(){
   turn = gameSet[gameSet.length-1][`turn`]
   console.log(`function: : newRound`);
