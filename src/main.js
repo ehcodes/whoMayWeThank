@@ -35,11 +35,17 @@ let player2Score = document.querySelector(`#player2Score`);
 let player2RoundScore = document.querySelector(`#player2RoundScore`);
 let playerRoundScores = document.querySelectorAll(`.playerRoundScore`);
 
+let popUp = document.querySelector(`#popup`)
+
+let startGameButton = document.querySelector(`#startGame`);
 let invention = document.querySelector(`#invention`);
 let answerCards = document.querySelectorAll(`.answer`);
 let currentRound = document.querySelector(`#currentRound`);
 
-// identify active player
+startGameButton.addEventListener('click', beginGame);
+// nextSetButton.addEventListener('click', beginGame);
+// nextRoundButton.addEventListener('click', beginGame);
+// resetGameButton.addEventListener('click', beginGame);
 
 // all answers array - with all possible answers
 let answers = [
@@ -382,9 +388,8 @@ function stageGame() {
   return gameSet;
 }
 
-
-
 function beginGame() {
+  popUp.classList.add(`displayNone`)
   let gameSet = stageGame();
   let turn = gameSet[0][`turn`]
   let gameRound = gameSet[0][`round`]
@@ -452,6 +457,7 @@ function beginGame() {
     answerCards.forEach((el)=>{
       el.addEventListener(`click`, ()=>{
         console.log(turn)
+        // identify active player
         turn+=1;
         console.log(turn)
         if (el.classList.contains(`correct`)){
@@ -517,4 +523,3 @@ function beginGame() {
     round % 3 === 0 ? console.log(`round has completed`) : null; // will change this to update cardset once that function has been created
   }
 }
-beginGame();
