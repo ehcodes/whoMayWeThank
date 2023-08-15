@@ -501,6 +501,8 @@ function populateSetData(set) {
     answerCards[cardIndex[1]].innerText=set[0][`wrongAnswer1`];
     answerCards[cardIndex[2]].innerText=set[0][`wrongAnswer2`];
     answerCards[cardIndex[3]].innerText=set[0][`wrongAnswer3`];
+  }else{
+    // startNew Round
   }
 }
 
@@ -533,10 +535,10 @@ function addRedShadow(element){
 function determinePlayer(){
   console.log(`function: : determinePlayer`);
   if(turn%2===0){
-    console.log(`turn: : :${turn}`)
+    console.log(`p2 turn: : ${turn}`)
     return player2
   }else{
-    console.log(`turn: : :${turn}`)
+    console.log(`p1 turn: : ${turn}`)
     return player1
   }
 }
