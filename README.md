@@ -1,9 +1,11 @@
 # Who may we Thank?
 [Live link to project](https://engridhernandez.com/whoMayWeThank/)
 
-This is a two player quiz game that quizzes the players on their knowledge of the inventors. The quiz game consists of 10 rounds, with 3 questions making up each round.
+This is a two player quiz game that quizzes the players on their knowledge of the inventors. The quiz game consists of 10 rounds, with 3 questions making up each round. Player 1 always gets to pick an answer each question. At the end of each individual question, the round score is updated for the player that won the round. At the end of each round, the game score is updated for the player that won the round. And the player with the highest game score at the end of the game wins the game.
 
-![start screen image](https://engridhernandez.com/whoMayWeThank/src/images/readMe/startScreen.png)
+Players interact with the game by clicking the cards and either the reset game, next set, or new round button that is rendered in a popup that appears at the end of each question.
+
+![start screen image](/src/images/readMe/startScreen.png)
 
 #### How it was Made
 This project was built using mostly functional javascript with a sprinkle of OOP javascript.
