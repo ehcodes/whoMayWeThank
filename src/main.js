@@ -385,7 +385,7 @@ function stageGame() {
         wrongAnswersArr[1][2],
         wrongAnswersArr[2][2]
       );
-      stagingGameSet.push(newCardSet);
+      stagingGameSet.unshift(newCardSet);
     }
   }
   createCardSet();
@@ -426,7 +426,6 @@ let roundSet = createRoundSet();
 // function to start game round
 function beginSet() {
   console.log(`function: : beginSet`);
-  clearPopupButtons();
   console.log("newRound length"+roundSet.length);
   endOrContinueRound(roundSet);
   checkCardClicks(roundSet);
@@ -466,14 +465,6 @@ function resetAnswerCards(){
   })
 }
 
-function isolateCardSet() {
-  console.log(`function: : isolateCardSet`);
-  if(gameSet.length>0){
-    let cardSet = stagingGameSet.pop();
-    return cardSet;
-  }
-}
-
 function createRoundSet() {
   console.log(`function: : createRoundSet`);
   return [isolateCardSet(), isolateCardSet(), isolateCardSet()];
@@ -481,8 +472,9 @@ function createRoundSet() {
 
 function isolateCardSet() {
   console.log(`function: : isolateCardSet`);
-  if(gameSet.length>3){
-    let cardSet = gameSet.pop();
+  if(stagingGameSet.length>0){
+    let cardSet = stagingGameSet.shift();
+    console.log(stagingGameSet)
     return cardSet;
   }else{
     endGame();
