@@ -15,26 +15,41 @@
     <title>Who may we Thank?</title>
     <script defer src="/whoMayWeThank/src/main.js"></script>
 </head>
-<body>    
-    <section id="popup">
-        <div id="popupInner">
-            <h1 id="popupStatement"></h1>
-            <section id="rules">
-                <h2>The Rules</h2>
-                <ul>
-                    <li>Player 1 always goes first.</li>
-                    <li>The game ends after 10 rounds.</li>
-                    <li>There are 3 questions per round.</li>
-                    <li>A round ends after all 3 round questions have been answered correctly.</li>
-                    <li>The game ends after all 30 game questions have been answered correctly.</li>
-                    <li>The game can be reset anytime after a question is answered correctly.</li>
-                </ul>
-                <button id="startGame">Start Game</button>
-            </section>
-            <button id="popupNextSet" class="displayNone">Next Set</button>
-            <button id="popupNextRound" class="displayNone">Next Round</button>
-            <button id="popupReset" class="displayNone">Restart</button>
-            <!--
+<body>
+    <section id="popup" class="preGamePopup">
+      <div id="popupInner" class="preGamePopupInner">
+        <h1>Who may we Thank?</h1>
+        <h2 id="popupStatement"></h2>
+        <section id="rules">
+          <h2>The Rules</h2>
+          <ul>
+            <li>Player 1 always goes first.</li>
+            <li>The game ends after 10 rounds.</li>
+            <li>There are 3 questions per round.</li>
+            <li>After each set, a prompt will appear.</li>
+            <li>Correct Answers will be highlighted in green.</li>
+            <li>Incorrect Answers will be highlighted in red.</li>
+            <li>
+              A round ends after all 3 round questions have been answered
+              correctly.
+            </li>
+            <li>
+              The game ends after all 30 game questions have been answered
+              correctly.
+            </li>
+            <li>
+              The game can be reset anytime after a question is answered
+              correctly.
+            </li>
+          </ul>
+          <button id="startGame">Start Game</button>
+        </section>
+        <div id="buttonContainer">
+          <button id="resetGame" class="displayNone">Reset Game</button>
+          <button id="nextSet" class="displayNone">Next Set</button>
+          <button id="nextRound" class="displayNone">Next Round</button>
+        </div>
+        <!--
                 THIS FUNCTIONALITY WILL BE ADDED LAST, TIME PERMITTING 
                 <h1 id="username"></h1>
                 <p>Enter your new username</p>
@@ -42,12 +57,12 @@
                 <button id="submitNameBtn">Change Name</button>
                 <button id="cancelNameChngBtn">Cancel</button>
             -->
-        </div>
+      </div>
     </section>
-   
+
     <header>
-        <h1>Who may we Thank?</h1>
-        <!-- 
+      <h1>Who may we Thank?</h1>
+      <!-- 
             THIS FUNCTIONALITY WILL BE ADDED LAST, TIME PERMITTING
             Options TEXT is temporary, will be a hamburger menu/ul with
                 - a game reset option
@@ -55,34 +70,37 @@
         <p>Options</p>
         -->
     </header>
+
     <main id="container">
-        <section id="player1" class="userStats">
-            <h1 id="player1Name" class="playerName">Player 1</h1>
-            <h2>Overall Score</h2>
-            <p id="player1Score" class="playerScore">0</p>
-            <h2>Current Round Score</h2>
-            <p id="player1RoundScore" class="playerRoundScore">0</p>
-        </section>
-        <section id="quiz">
-            <h1 id="question">Who may we thank for the invention of <span id="invention"></span>?</h1>
-            <div class="answerGroup">
-                <p class="answer">Person</p>
-                <p class="answer">Person</p>
-            </div>
-            <div class="answerGroup">
-                <p class="answer">Person</p>
-                <p class="answer">Person</p>
-            </div>
-            <h2>Current Round</h2>
-            <p id="currentRound">0</p>
-        </section>
-        <section id="player2" class="userStats">
-            <h1 id="player2Name" class="playerName">Player 2</h1>
-            <h2>Overall Score</h2>
-            <p id="player2Score" class="playerScore">0</p>
-            <h2>Current Round Score</h2>
-            <p id="player2RoundScore" class="playerRoundScore">0</p>
-        </section>
+      <section id="player1" class="userStats">
+        <h1 id="player1Name" class="playerName">Player 1</h1>
+        <h2>Overall Score</h2>
+        <p id="player1Score" class="playerScore">0</p>
+        <h2>Current Round Score</h2>
+        <p id="player1RoundScore" class="playerRoundScore">0</p>
+      </section>
+      <section id="quiz">
+        <h1 id="question" class="displayNone">
+          Who may we thank for the invention of <span id="invention"></span>?
+        </h1>
+        <div class="answerGroup">
+          <p class="answer">Person</p>
+          <p class="answer">Person</p>
+        </div>
+        <div class="answerGroup">
+          <p class="answer">Person</p>
+          <p class="answer">Person</p>
+        </div>
+        <h2>Current Round</h2>
+        <p id="currentRound">0</p>
+      </section>
+      <section id="player2" class="userStats">
+        <h1 id="player2Name" class="playerName">Player 2</h1>
+        <h2>Overall Score</h2>
+        <p id="player2Score" class="playerScore">0</p>
+        <h2>Current Round Score</h2>
+        <p id="player2RoundScore" class="playerRoundScore">0</p>
+      </section>
     </main>
-</body>
+  </body>
 </html>
