@@ -393,6 +393,7 @@ function stageGame() {
 }
 
 function beginGame() {
+  clearPopupButtons()
   console.log(`function: : beginGame`);
   question.classList.remove(`displayNone`);
   resetGameButton.classList.remove(`displayNone`);
@@ -419,18 +420,19 @@ function clearPopupButtons(){
 };
 
 let gameSet = stageGame();
-let turn = gameSet[0][`turn`];
 let gameRound = gameSet[0][`round`];
 let roundSet = createRoundSet();
+let turn = gameSet[gameSet.length-1][`turn`];
 
 // function to start game round
 function beginSet() {
   console.log(`function: : beginSet`);
   console.log("newRound length"+roundSet.length);
-  endOrContinueRound(roundSet);
   checkCardClicks(roundSet);
+  endOrContinueRound(roundSet);
 }
 function newRound(){
+  turn = gameSet[gameSet.length-1][`turn`]
   console.log(`function: : newRound`);
   // let roundWinner = determinePlayer();
   // msg = `${roundWinner.playerName} won this round.`
@@ -452,17 +454,20 @@ function resetRoundScores(){
 
 function resetAnswerCards(){
   console.log(`function: : resetAnswerCards`);
-  console.log(answerCards)
-  answerCards.forEach((answerCard)=>{
-    if(answerCard.classList.contains(`correct`)){
-      answerCard.classList.remove(`greenShadow`);
-      answerCard.classList.remove(`correct`);
-      console.log(`green shadow removed`)
-    }else if(answerCard.classList.contains(`redShadow`)){
-      answerCard.classList.remove(`redShadow`);
-      console.log(`red shadow removed`)
-    }
-  })
+  console.log(answerCards);
+  console.log(turn)
+  if(turn>1){
+    answerCards.forEach((answerCard)=>{
+      if(answerCard.classList.contains(`correct`)){
+        answerCard.classList.remove(`greenShadow`);
+        answerCard.classList.remove(`correct`);
+        console.log(`green shadow removed`);
+      }else if(answerCard.classList.contains(`redShadow`)){
+        answerCard.classList.remove(`redShadow`);
+        console.log(`red shadow removed`);
+      }
+    })
+  }
 }
 
 function createRoundSet() {
@@ -524,11 +529,14 @@ function addRedShadow(element){
 function determinePlayer(){
   console.log(`function: : determinePlayer`);
   if(turn%2===0){
+    console.log(`turn: : :${turn}`)
     return player2
   }else{
+    console.log(`turn: : :${turn}`)
     return player1
   }
 }
+
 function updatePlayerScore(set){
   console.log(`function: : updatePlayerScore(roundSet)`);
   let roundWinner = determinePlayer();
@@ -546,7 +554,7 @@ function updatePlayerScore(set){
 
 function endOrContinueRound(set) {
   console.log(`function: : endOrContinueRound(roundSet)`);
-  if(gameRound%3==0){
+  if(gameRound%3==0 && gameRound>0){
     let roundWinner = determinePlayer();
     msg = `${roundWinner.playerName} won round ${gameRound}.`
     roundWinner.score+=1
