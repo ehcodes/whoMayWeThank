@@ -319,7 +319,7 @@ let answers = [
 ];
 
 function generateRandomCardIndex(max) {
-  console.log(`function: : : generateRandomCardIndex`);
+  console.log(`function: : generateRandomCardIndex`);
   return Math.floor(Math.random() * max);
 }
 
@@ -393,7 +393,6 @@ function stageGame() {
 }
 
 function beginGame() {
-  clearPopupButtons()
   console.log(`function: : beginGame`);
   question.classList.remove(`displayNone`);
   resetGameButton.classList.remove(`displayNone`);
@@ -409,7 +408,7 @@ function popupUpdate(message,button){
   popUp.classList.remove('displayNone');
 }
 
-function clearPopupButtons(){
+function clearPopup(){
   console.log(`function: : clearPopupButtons`);
   buttons.forEach((el)=>{
     if(el.attributes.id.nodeValue!=`resetGame`){
@@ -456,7 +455,7 @@ function resetAnswerCards(){
   console.log(`function: : resetAnswerCards`);
   console.log(answerCards);
   console.log(turn)
-  if(turn>1){
+  if(turn>0){
     answerCards.forEach((answerCard)=>{
       if(answerCard.classList.contains(`correct`)){
         answerCard.classList.remove(`greenShadow`);
@@ -488,10 +487,11 @@ function isolateCardSet() {
 
 function populateSetData(set) {
   console.log(`function: : populateSetData(roundSet)`);
+  clearPopup();
   resetAnswerCards();
   let cardIndex = createCardIndexArr(4, 4);
   console.log(cardIndex)
-  console.log(set[0][`rightAnswer`]);
+  set.lenght>0?console.log(set[0][`rightAnswer`]):null
   invention.innerText=set[0][`invention`];
   answerCards[cardIndex[0]].innerText=set[0][`rightAnswer`];
   answerCards[cardIndex[0]].classList.add(`correct`);
@@ -563,8 +563,7 @@ function endOrContinueRound(set) {
     resetRoundScores();
   }else{
     populateSetData(set);
-    console.log("populateSetData");
-    // continue round?
+    console.log("function: : populateSetData");
   }
 }
 
