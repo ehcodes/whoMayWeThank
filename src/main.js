@@ -319,11 +319,13 @@ let answers = [
 ];
 
 function generateRandomCardIndex(max) {
+  console.log(`function: : : generateRandomCardIndex`);
   return Math.floor(Math.random() * max);
 }
 
 // added parameters to make function reusable - moved out of stageGame so it could be used in isolateCardIndex function
 function createCardIndexArr(length, max) {
+  console.log(`function: : createCardIndexArr`);
   let cardIndexArr = [];
   for (let i = 0; i < 9999; i++) {
     let randomCardIndex = generateRandomCardIndex(max);
@@ -338,6 +340,7 @@ function createCardIndexArr(length, max) {
 }
 
 function stageGame() {
+  console.log(`function: : stageGame`);
   class CardSet {
     constructor(
       invention,
@@ -356,7 +359,6 @@ function stageGame() {
       this.wrongAnswer3 = wrongAnswer3;
     }
   }
-
   let indexArr = createCardIndexArr(30, 54);
   /* // validate card index array is functional
   console.log(indexArr); */
@@ -364,11 +366,13 @@ function stageGame() {
   
   // function to filter answers array to ensure no duplicate values in cardset
   function filterAnswers(originalArray, element) {
+    console.log(`function: : filterAnswers`);
     filteredArray = originalArray.filter((answer) => answer !== element);
     return filteredArray;
   }
   // function to assign the 30 card set for the current game
   function createCardSet() {
+    console.log(`function: : createCardSet`);
     for (let i = 0; i < indexArr.length; i++) {
       const index = indexArr[i];
       const currEl = answers[index];
@@ -389,6 +393,7 @@ function stageGame() {
 }
 
 function beginGame() {
+  console.log(`function: : beginGame`);
   question.classList.remove(`displayNone`);
   resetGameButton.classList.remove(`displayNone`);
   popUpInner.classList.replace(`preGamePopupInner`,`midGamePopupInner`);
@@ -397,40 +402,62 @@ function beginGame() {
 }
 
 function popupUpdate(message,button){
+  console.log(`function: : popupUpdate(message,button)`);
   popupStatement.innerText=message;
   button.classList.remove('displayNone');
   popUp.classList.remove('displayNone');
 }
 
+function clearPopupButtons(){
+  console.log(`function: : clearPopupButtons`);
+  buttons.forEach((el)=>{
+    if(el.attributes.id.nodeValue!=`resetGame`){
+      el.classList.add(`displayNone`);
+      popUp.classList.add(`displayNone`);
+    }
+  })
+};
+
 let gameSet = stageGame();
 let turn = gameSet[0][`turn`];
 let gameRound = gameSet[0][`round`];
 
-let roundSet = createRoundSet();
 
 // function to start game round
 function beginSet() {
+  console.log(`function: : beginSet`);
+  clearPopupButtons();
+  console.log("newRound length"+roundSet.length);
   endOrContinueRound(roundSet);
   checkCardClicks(roundSet);
 }
 function newRound(){
+  console.log(`function: : newRound`);
+  // let roundWinner = determinePlayer();
+  // msg = `${roundWinner.playerName} won this round.`
+  // popupUpdate(msg,nextRoundButton)
   gameRound += 1;
   currentRound.innerText = gameRound;
   beginSet();
 }
 
 function resetRoundScores(){
+  console.log(`function: : resetRoundScores`);
+  console.log(gameSet)
   player1.roundScore = 0;
   player2.roundScore = 0;
   playerRoundScores.forEach((el)=>{
     el.innerText = 0;
   })
 }
+
 function resetAnswerCards(){
+  console.log(`function: : resetAnswerCards`);
   console.log(answerCards)
   answerCards.forEach((answerCard)=>{
     if(answerCard.classList.contains(`correct`)){
       answerCard.classList.remove(`greenShadow`);
+      answerCard.classList.remove(`correct`);
       console.log(`green shadow removed`)
     }else if(answerCard.classList.contains(`redShadow`)){
       answerCard.classList.remove(`redShadow`);
@@ -440,6 +467,7 @@ function resetAnswerCards(){
 }
 
 function isolateCardSet() {
+  console.log(`function: : isolateCardSet`);
   if(gameSet.length>0){
     let cardSet = stagingGameSet.pop();
     return cardSet;
@@ -447,10 +475,12 @@ function isolateCardSet() {
 }
 
 function createRoundSet() {
+  console.log(`function: : createRoundSet`);
   return [isolateCardSet(), isolateCardSet(), isolateCardSet()];
 }
 
 function isolateCardSet() {
+  console.log(`function: : isolateCardSet`);
   if(gameSet.length>3){
     let cardSet = gameSet.pop();
     return cardSet;
@@ -460,7 +490,10 @@ function isolateCardSet() {
 }
 
 function populateSetData(set) {
+  console.log(`function: : populateSetData(roundSet)`);
+  resetAnswerCards();
   let cardIndex = createCardIndexArr(4, 4);
+  console.log(cardIndex)
   console.log(set[0][`rightAnswer`]);
   invention.innerText=set[0][`invention`];
   answerCards[cardIndex[0]].innerText=set[0][`rightAnswer`];
@@ -471,6 +504,7 @@ function populateSetData(set) {
 }
 
 function checkCardClicks(set){
+  console.log(`function: : checkCardClicks(roundSet)`);
   answerCards.forEach((el)=>{
     el.addEventListener(`click`, ()=>{
       // turn is used to identify the active player
@@ -486,14 +520,17 @@ function checkCardClicks(set){
 }
 
 function addGreenShadow(element){
+  console.log(`function: : addGreenShadow`);
   element.classList.add(`greenShadow`);
 }
 
 function addRedShadow(element){
+  console.log(`function: : addRedShadow`);
   element.classList.add(`redShadow`);
 }
 
 function determinePlayer(){
+  console.log(`function: : determinePlayer`);
   if(turn%2===0){
     return player2
   }else{
@@ -501,11 +538,13 @@ function determinePlayer(){
   }
 }
 function updatePlayerScore(set){
+  console.log(`function: : updatePlayerScore(roundSet)`);
   let roundWinner = determinePlayer();
   msg = `${roundWinner.playerName} won this set.`
   popupUpdate(msg,nextSetButton);
   roundWinner.roundScore+=1;
   roundWinner.winningSets.push(set.shift());
+  gameSet.shift();
   if(roundWinner==player2){
     player2RoundScore.innerText = player2.roundScore;
   }else{
@@ -514,9 +553,13 @@ function updatePlayerScore(set){
 }
 
 function endOrContinueRound(set) {
-  if(set.length===0){
-    console.log("beginNewRound");
-    round+=1;
+  console.log(`function: : endOrContinueRound(roundSet)`);
+  if(gameRound%3==0){
+    let roundWinner = determinePlayer();
+    msg = `${roundWinner.playerName} won round ${gameRound}.`
+    roundWinner.score+=1
+    popupUpdate(msg,nextRoundButton);
+    gameRound+=1;
     resetRoundScores();
   }else{
     populateSetData(set);
@@ -538,6 +581,7 @@ function endOrContinueRound(set) {
 // }
 
 function endGame() {
+  console.log(`function: : endGame`);
   if(player1.score > player2.score) {
     let winner=player1.playerName
     let loser = player2.playerName
@@ -549,17 +593,7 @@ function endGame() {
   // will change this to update cardset once that function has been created
 }
 
-
 startGameButton.addEventListener('click', beginGame);
 nextSetButton.addEventListener('click', beginSet);
 nextRoundButton.addEventListener('click', newRound);
 resetGameButton.addEventListener('click', window.location.reload.bind(window.location));
-
-buttons.forEach((el)=>{
-  // console.log(el.attributes.id.nodeValue)
-  el.addEventListener('click', ()=>{
-    resetAnswerCards();
-    el.classList.add(`displayNone`);
-    popUp.classList.add(`displayNone`);
-  });
-})
