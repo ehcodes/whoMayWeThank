@@ -78,23 +78,35 @@ button{
     font-size: 1.3rem;
 }
 
-.userStats p {
+p {
     padding-top: 1rem;
-    font-size: 24px;
+    font-size: 1.714rem;
 }
 
 #quiz{
     display: flex;
     flex-flow: row wrap;
+    align-items:center;
+    justify-content: center;
     min-width: 50vw;
     height:fit-content;
     border:1px solid blue;
     gap:2.5%;
+    padding:2rem;
+}
+
+#quiz h2{
+    padding-top:2rem;
+    min-width:100%;
+}
+
+#quiz p{
+    padding-top:0;
 }
 
 #question{
     color: rgb(85, 170, 255);
-    padding:2rem;
+    padding-bottom:2rem;
     font-size:3rem;
     width:100%;
 }
@@ -116,4 +128,11 @@ button{
     width:45%;
     border-radius: 40px;
     margin:2.5%;
+}
+
+.greenShadow{
+    box-shadow: 0px 0px 10px 10px rgba(9, 250, 33, 0.4);
+}
+.redShadow{
+    box-shadow: 0px 0px 10px 10px rgba(255, 84, 84, 0.4);
 }
