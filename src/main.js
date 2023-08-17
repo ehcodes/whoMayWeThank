@@ -463,10 +463,8 @@ function resetAnswerCards(){
       if(answerCard.classList.contains(`correct`)){
         answerCard.classList.remove(`greenShadow`);
         answerCard.classList.remove(`correct`);
-        console.log(`green shadow removed`);
       }else if(answerCard.classList.contains(`redShadow`)){
         answerCard.classList.remove(`redShadow`);
-        console.log(`red shadow removed`);
       }
     })
   }
